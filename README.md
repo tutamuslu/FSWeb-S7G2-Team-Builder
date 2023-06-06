@@ -83,4 +83,3 @@ Uygulama ayrıntılarına ve mimariye dikkat edin. Bunu başarmanın birçok yol
 - [ ] Her biri kendi ekip üyeleri listesine sahip birden çok ekibi takip edebilmeniz için Uygulamanızın başka bir katmanını oluşturun.
 - [ ] Form validation hakkındaki çeşitli stratejileri inceleyin. Ekip üyelerinin adı olarak bir sayı girmeye çalışırsanız ne olur? Appiniz buna izin verir mi? Öyle mi? Fieldlardan birinin değerine bir fonksiyon girerseniz ne olur? Bu ne kadar tehlikeli olur? Bunu nasıl engellersin?
 - [ ] Formları stilleyin. Input etiketleri için statelerine göre üzerine yazılması gerekebilecek bazı tarayıcı varsayılanları vardır (active, focus, hover, vb.); Bu CSS özelliklerini şık hale getirin.
-
