@@ -1,28 +1,28 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
 const Form = (props) => {
-    const {uyeler,setUyeler,editId} = props;
+
+    const { uyeler, setUyeler, editId } = props;
+
     const bosData = {
-        firstName:"",
-        lastName:"",
-        email:"",
-        position:""
+        firstName: "",
+        lastName: "",
+        email: "",
+        position: ""
+    }
+
+    const [uye, setUye] = useState(bosData)
     
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUye({ ...uye, [name]: value })
     }
-
-
-    const [uye, setUye] = useState (editId > 0? uyeler.find(item=> item.id==editId):bosData)
-    const handleChange = (e)=> {
-        const {name,value } = e.target;
-        setUye({...uye,[name]:value})
-
-    }
-    const handleSubmit = (e)=> {
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-       
-        if (editId>0 ) {
-          
-            
-            const eskiUye = uyeler.find(item=> item.id==editId)
+        
+        if (editId > 0) {
+            const eskiUye = uyeler.find(item => item.id == editId)
             eskiUye.firstName = uye.firstName
             eskiUye.lastName = uye.lastName
             eskiUye.email = uye.email
@@ -30,15 +30,21 @@ const Form = (props) => {
             setUyeler([...uyeler])
         }
         else {
-            const yeniUye = {...uye, id:(uyeler.length +1)}
-        setUyeler([...uyeler,yeniUye])
-
+            const yeniUye = { ...uye, id: (uyeler.length + 1) }
+            setUyeler([...uyeler, yeniUye])
         }
-        
-        setUye(bosData) 
+
+        setUye(bosData)
     }
+
+    useEffect(() => {
+        if(editId >= 1){
+            setUye(uyeler[editId-1])
+        }
+    }, [editId]);
+
     return (
-        <form onSubmit = {handleSubmit}  >
+        <form onSubmit={handleSubmit}  >
             <div>
                 <label >Name:
                     <input type="text" name="firstName" placeholder="isim giriniz..." onChange={handleChange} value={uye.firstName} />
@@ -52,12 +58,9 @@ const Form = (props) => {
                 <label >Position:
                     <input type="text" name="position" placeholder="Position giriniz..." onChange={handleChange} value={uye.position} />
                 </label>
-                <button type = "submit" value = "submit">
-                Gönder
+                <button type="submit" value="submit">
+                    Gönder
                 </button>
-
-
-
             </div>
         </form>
     )
