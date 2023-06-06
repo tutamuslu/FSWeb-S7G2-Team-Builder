@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const Form = (props) => {
+const MyForm = (props) => {
 
     const { uyeler, setUyeler, editId } = props;
 
@@ -12,15 +13,15 @@ const Form = (props) => {
     }
 
     const [uye, setUye] = useState(bosData)
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUye({ ...uye, [name]: value })
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if (editId > 0) {
             const eskiUye = uyeler.find(item => item.id == editId)
             eskiUye.firstName = uye.firstName
@@ -38,31 +39,69 @@ const Form = (props) => {
     }
 
     useEffect(() => {
-        if(editId >= 1){
-            setUye(uyeler[editId-1])
+        if (editId >= 1) {
+            setUye(uyeler[editId - 1])
         }
     }, [editId]);
 
     return (
-        <form onSubmit={handleSubmit}  >
-            <div>
-                <label >Name:
-                    <input type="text" name="firstName" placeholder="isim giriniz..." onChange={handleChange} value={uye.firstName} />
-                </label>
-                <label >Surname:
-                    <input type="text" name="lastName" placeholder="Soyadınızı giriniz..." onChange={handleChange} value={uye.lastName} />
-                </label>
-                <label >Email:
-                    <input type="text" name="email" placeholder="Email giriniz..." onChange={handleChange} value={uye.email} />
-                </label>
-                <label >Position:
-                    <input type="text" name="position" placeholder="Position giriniz..." onChange={handleChange} value={uye.position} />
-                </label>
-                <button type="submit" value="submit">
-                    Gönder
-                </button>
-            </div>
-        </form>
+        <Form>
+            <FormGroup>
+                <Label for="firstName">
+                    Name
+                </Label>
+                <Input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="İsim giriniz.."
+                    type="text"
+                    value={uye.firstName}
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            <FormGroup>
+                <Label for="lastName">
+                    Surname
+                </Label>
+                <Input
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Soyisim giriniz.."
+                    type="text"
+                    value={uye.lastName}
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            <FormGroup>
+                <Label for="email">
+                    Email
+                </Label>
+                <Input
+                    id="email"
+                    name="email"
+                    placeholder="İsim giriniz.."
+                    type="email"
+                    value={uye.email}
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            <FormGroup>
+                <Label for="position">
+                    Position
+                </Label>
+                <Input
+                    id="position"
+                    name="position"
+                    placeholder="Pozisyon giriniz.."
+                    type="text"
+                    value={uye.position}
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            <Button onClick={handleSubmit}>
+                Gönder
+            </Button>
+        </Form>
     )
 }
-export default Form;
+export default MyForm;

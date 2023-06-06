@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-import Form from './components/Form'
+import MyForm from './components/Form'
+import Listele from './components/List';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -14,21 +16,8 @@ function App() {
 
   return (
     <div className="App">
-      <Form editId={editId} uyeler={uyeler} setUyeler={setUyeler} />
-      {uyeler.map((uye) =>
-      (
-        <div key={uye.id}>
-          <span>
-            {uye.firstName + " " + uye.lastName}
-          </span>
-          <span>
-            <button onClick={() => handleEdit(uye.id)}>
-              Düzelt
-            </button>
-          </span>
-        </div>
-      )
-      )}
+      <MyForm editId={editId} uyeler={uyeler} setUyeler={setUyeler} />
+      <Listele uyeler={uyeler} handleEdit={handleEdit} />
     </div>
   )
 }
